@@ -149,31 +149,32 @@ ul, ol { margin: 0 0 1em; padding-left: 1.3em; }
 .mnav ul { list-style: none; padding: 0; margin: 0; }
 .mnav li a { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 500; }
 .mnav p { margin: 6px 0 14px; }
-.slider { position: relative; color: #fff; background: var(--blue-3) linear-gradient(100deg, var(--blue-3) 0%, #0B5E86 55%, var(--blue) 100%); overflow: hidden; }
-.slider::after { content: ""; position: absolute; right: -120px; top: -160px; width: 520px; height: 520px; border-radius: 50%; border: 60px solid rgba(255, 255, 255, .04); pointer-events: none; }
+.slider { position: relative; background: #fff; overflow: hidden; border-bottom: 1px solid var(--line); }
 .slides { display: grid; }
-.slide { grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity .7s ease, visibility 0s linear .7s; }
-.slide.is-on { opacity: 1; visibility: visible; transition: opacity .7s ease; z-index: 1; }
-.slide-in { display: grid; gap: 22px; align-items: center; padding-top: 28px; padding-bottom: 84px; }
-@media (min-width: 900px) { .slide-in { grid-template-columns: 1fr 1.05fr; gap: 48px; padding-top: 44px; padding-bottom: 92px; min-height: 420px; } }
-.slide-title { margin: 0 0 12px; font: 700 clamp(24px, 3.2vw, 38px)/1.15 var(--f-head); letter-spacing: -.01em; }
-.slide-sub { margin: 0 0 22px; max-width: 46ch; color: #CFE3EE; font-size: clamp(15px, 1.3vw, 17px); line-height: 1.55; }
+.slide { grid-area: 1 / 1; position: relative; opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility 0s linear .8s; }
+.slide.is-on { opacity: 1; visibility: visible; transition: opacity .8s ease; z-index: 1; }
+.slide-img { display: block; aspect-ratio: 3 / 1; overflow: hidden; }
+.slide-img img { width: 100%; height: 100%; object-fit: cover; }
+.slide-in { position: absolute; inset: 0; display: flex; align-items: center; pointer-events: none; }
+.slide-text { max-width: min(560px, 42%); pointer-events: auto; padding-bottom: 30px; }
+.slide-title { margin: 0 0 12px; font: 700 clamp(24px, 2.6vw, 38px)/1.15 var(--f-head); color: var(--ink); }
+.slide-sub { margin: 0 0 22px; color: var(--ink-2); font-size: clamp(14px, 1.2vw, 17px); line-height: 1.55; }
 .slide-btns { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
-.btn-line { background: transparent; border-color: rgba(255, 255, 255, .7); color: #fff; }
-.btn-line:hover { background: rgba(255, 255, 255, .12); border-color: #fff; color: #fff; }
-.slide-img { margin: 0; aspect-ratio: 4 / 3; background: #fff; border: 6px solid #fff; box-shadow: 0 18px 40px rgba(0, 0, 0, .28); overflow: hidden; }
-.slide-img img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.04); transition: transform 6s ease-out; }
-.slide.is-on .slide-img img { transform: scale(1); }
-@media (max-width: 899px) { .slide-img { order: -1; aspect-ratio: 16 / 10; border-width: 4px; } .slide-text { text-align: left; } }
-.slider-ctrl { position: absolute; left: 0; right: 0; bottom: 24px; z-index: 2; display: flex; align-items: center; gap: 8px; }
-.slider-arrow { width: 38px; height: 38px; border: 1px solid rgba(255, 255, 255, .5); border-radius: var(--r); background: transparent; color: #fff; cursor: pointer; display: grid; place-items: center; }
-.slider-arrow:hover { background: rgba(255, 255, 255, .15); border-color: #fff; }
+.slider-ctrl { position: absolute; left: 0; right: 0; bottom: 22px; z-index: 2; display: flex; align-items: center; gap: 8px; pointer-events: none; }
+.slider-ctrl > * { pointer-events: auto; }
+.slider-arrow { width: 38px; height: 38px; border: 1px solid var(--line-2); border-radius: var(--r); background: #fff; color: var(--blue); cursor: pointer; display: grid; place-items: center; }
+.slider-arrow:hover { border-color: var(--blue); }
 .slider-dots { display: flex; align-items: center; gap: 6px; padding: 0 6px; }
 .slider-dots button { width: 36px; height: 38px; padding: 0; border: 0; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-.slider-dots button::before { content: ""; display: block; width: 24px; height: 4px; border-radius: 2px; background: rgba(255, 255, 255, .4); transition: background-color .3s, width .3s; }
-.slider-dots button:hover::before { background: rgba(255, 255, 255, .7); }
-.slider-dots button[aria-current="true"]::before { width: 36px; background: #fff; }
-@media (prefers-reduced-motion: reduce) { .slide-img img { transform: none !important; } }
+.slider-dots button::before { content: ""; display: block; width: 24px; height: 4px; border-radius: 2px; background: var(--line-2); transition: background-color .3s, width .3s; }
+.slider-dots button:hover::before { background: var(--ink-2); }
+.slider-dots button[aria-current="true"]::before { width: 36px; background: var(--blue); }
+@media (max-width: 899px) {
+.slide-img { aspect-ratio: 16 / 10; }
+.slide-img img { object-position: 88% center; }
+.slide-in { position: static; display: block; padding-top: 16px; padding-bottom: 70px; }
+.slide-text { max-width: none; padding: 0; }
+}
 .cat-top { display: grid; gap: 20px; align-items: start; }
 @media (min-width: 900px) { .cat-top { grid-template-columns: 1fr 360px; gap: 28px; } }
 .cat-photo { margin: 0; border: 1px solid var(--line); aspect-ratio: 4 / 3; overflow: hidden; }
@@ -450,6 +451,16 @@ dialog.modal::backdrop { background: rgba(0, 0, 0, .5); }
 .art-grid.one .art-ico { grid-row: 1 / span 2; }
 .art-grid.one .art-more { grid-column: 3; grid-row: 1 / span 2; white-space: nowrap; }
 }
+.brand-img { display: block; height: 64px; width: auto; }
+@media (max-width: 899px) { .brand-img { height: 48px; } }
+.ftr .brand-img { height: 72px; background: #fff; padding: 6px 10px; border-radius: var(--r); }
+@media (max-width: 599px) {
+.slider-dots { gap: 2px; padding: 0 2px; }
+.slider-dots button { width: 24px; }
+.slider-dots button::before { width: 14px; }
+.slider-dots button[aria-current="true"]::before { width: 22px; }
+.slider-arrow { flex: none; }
+}
 </style>
 <script>document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://compressor-eko.ru/"},{"@type":"ListItem","position":2,"name":"Статьи","item":"https://compressor-eko.ru/stati"},{"@type":"ListItem","position":3,"name":"Винтовой компрессор: как устроен и как выбрать","item":"https://compressor-eko.ru/stati/vintovoy-kompressor"}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Винтовой компрессор: как устроен и как выбрать","description":"Как работает маслозаполненный винтовой компрессор, из чего он состоит, чем отличаются модели с частотным приводом и на что смотреть при выборе.","url":"https://compressor-eko.ru/stati/vintovoy-kompressor","author":{"@type":"Organization","name":"ООО «Экоинжпром»"},"publisher":{"@id":"https://compressor-eko.ru/#org"},"dateModified":"2026-11-24"}</script>
@@ -459,7 +470,7 @@ dialog.modal::backdrop { background: rgba(0, 0, 0, .5); }
 <a class="skip" href="#main">Перейти к содержимому</a>
 <header class="hdr" id="top">
   <div class="hdr-top"><div class="wrap hdr-in">
-    <a class="brand" href="/compressor-eko-demo/" aria-label="Экоинжпром — на главную"><svg class="logo-svg logo-lockup hdr-logo" viewBox="245 111 2807 514" role="img" aria-label="Экоинжпром"><g class="lg-gear"><path class="gear-spin" d="M522.6 164.1L526.5 130.7L619.5 130.7L623.4 164.1A269 207.6 0 0 1 661.5 171.9L686.5 144.5L767 180.4L748.8 210.8A269 207.6 0 0 1 776.6 232.3L816.1 218.3L862.6 280.4L827.1 299.7A269 207.6 0 0 1 837.3 329.1L880.5 332.1L880.5 403.9L837.3 406.9A269 207.6 0 0 1 827.1 436.3L862.6 455.6L816.1 517.7L776.6 503.7A269 207.6 0 0 1 748.8 525.2L767 555.6L686.5 591.5L661.5 564.1A269 207.6 0 0 1 623.4 571.9L619.5 605.3L526.5 605.3L522.6 571.9A269 207.6 0 0 1 484.5 564.1L459.5 591.5L379 555.6L397.2 525.2A269 207.6 0 0 1 369.4 503.7L329.9 517.7L283.4 455.6L318.9 436.3A269 207.6 0 0 1 308.7 406.9L265.5 403.9L265.5 332.1L308.7 329.1A269 207.6 0 0 1 318.9 299.7L283.4 280.4L329.9 218.3L369.4 232.3A269 207.6 0 0 1 397.2 210.8L379 180.4L459.5 144.5L484.5 171.9A269 207.6 0 0 1 522.6 164.1Z" fill="none" stroke="currentColor" stroke-width="34" stroke-linejoin="round"/></g><g class="lg-inner"><path d="M444 362C402 326 408 250 470 230C522 213 624 213 676 230C738 250 744 326 702 362C652 338 494 338 444 362Z" fill="none" stroke="currentColor" stroke-width="30" stroke-linejoin="round"/></g><g class="lg-title" transform="translate(170.2 -1036.0) scale(3.2463)"><path d="M284.28 462.17Q277.98 462.17 273.02 460.24Q268.06 458.32 264.62 454.39Q261.18 450.46 259.39 444.51L269.73 441.94Q271.21 446.42 274.83 449.33Q278.44 452.25 283.58 452.21Q287.19 452.13 290.48 450.77Q293.77 449.41 295.79 446.61Q297.27 444.74 298.06 442.51Q298.86 440.27 299.21 437.9H279.61V428.02H299.29Q298.59 423.74 296.57 420.52Q294.54 417.29 291.28 415.5Q288.01 413.71 283.58 413.79Q278.33 413.83 274.65 416.74Q270.98 419.66 269.58 424.52L259 423.04Q261.1 413.87 267.67 408.85Q274.24 403.83 284.28 403.83Q292.41 403.83 298.34 407.51Q304.27 411.18 307.49 417.76Q310.72 424.33 310.72 433Q310.72 441.17 307.55 447.78Q304.38 454.39 298.45 458.28Q292.52 462.17 284.28 462.17ZM323.79 461V405H334.36V430.82L355.67 405H368.59L345.17 432.61L370.06 461H356.69L334.36 435.49V461ZM404.83 462.17Q396.43 462.17 390.34 458.51Q384.25 454.86 380.97 448.28Q377.68 441.71 377.68 433Q377.68 424.29 380.97 417.72Q384.25 411.14 390.34 407.49Q396.43 403.83 404.83 403.83Q413.23 403.83 419.31 407.49Q425.4 411.14 428.68 417.72Q431.97 424.29 431.97 433Q431.97 441.71 428.68 448.28Q425.4 454.86 419.31 458.51Q413.23 462.17 404.83 462.17ZM404.83 452.21Q410.15 452.29 413.69 449.92Q417.23 447.54 419 443.19Q420.77 438.83 420.77 433Q420.77 427.17 419 422.89Q417.23 418.61 413.69 416.24Q410.15 413.87 404.83 413.79Q399.5 413.71 395.96 416.08Q392.42 418.46 390.65 422.81Q388.88 427.17 388.88 433Q388.88 438.83 390.65 443.11Q392.42 447.39 395.96 449.76Q399.5 452.13 404.83 452.21ZM490.84 461H480.11V423.67L455.77 461H445.03V405H455.77V442.33L480.11 405H490.84ZM507.02 461V405H517.6V428.02H542.64V405H553.22V461H542.64V437.9H517.6V461ZM564.73 461 584.56 432.61 566.2 405H578.73L594.59 430.04V405H605.17V430.04L621.04 405H633.56L615.2 432.61L635.04 461H622.05L605.17 436.27V461H594.59V436.27L577.71 461ZM646.54 461V405H692.74V461H682.17V414.88H657.12V461ZM708.92 461V405H732.56Q733.38 405 734.76 405.06Q736.14 405.12 737.23 405.31Q742.25 406.09 745.45 408.62Q748.66 411.14 750.18 414.98Q751.7 418.81 751.7 423.51Q751.7 428.22 750.16 432.05Q748.62 435.88 745.42 438.41Q742.21 440.93 737.23 441.71Q736.14 441.87 734.74 441.94Q733.34 442.02 732.56 442.02H719.5V461ZM719.5 432.14H732.1Q732.91 432.14 733.89 432.07Q734.86 431.99 735.67 431.76Q737.81 431.17 738.98 429.79Q740.15 428.41 740.59 426.72Q741.04 425.03 741.04 423.51Q741.04 421.99 740.59 420.3Q740.15 418.61 738.98 417.23Q737.81 415.85 735.67 415.27Q734.86 415.03 733.89 414.96Q732.91 414.88 732.1 414.88H719.5ZM788.79 462.17Q780.39 462.17 774.31 458.51Q768.22 454.86 764.93 448.28Q761.65 441.71 761.65 433Q761.65 424.29 764.93 417.72Q768.22 411.14 774.31 407.49Q780.39 403.83 788.79 403.83Q797.19 403.83 803.28 407.49Q809.36 411.14 812.65 417.72Q815.94 424.29 815.94 433Q815.94 441.71 812.65 448.28Q809.36 454.86 803.28 458.51Q797.19 462.17 788.79 462.17ZM788.79 452.21Q794.12 452.29 797.66 449.92Q801.2 447.54 802.97 443.19Q804.74 438.83 804.74 433Q804.74 427.17 802.97 422.89Q801.2 418.61 797.66 416.24Q794.12 413.87 788.79 413.79Q783.46 413.71 779.93 416.08Q776.39 418.46 774.62 422.81Q772.85 427.17 772.85 433Q772.85 438.83 774.62 443.11Q776.39 447.39 779.93 449.76Q783.46 452.13 788.79 452.21ZM829 461V405H838.49L857 442.18L875.51 405H885V461H875.12V427.56L858.87 461H855.13L838.88 427.56V461Z" fill="currentColor"/></g></svg></a>
+    <a class="brand" href="/compressor-eko-demo/" aria-label="Экоинжпром — на главную"><img class="brand-img" src="/compressor-eko-demo/img/logo-client.png" width="340" height="250" alt="Экоинжпром"></a>
     <div class="hdr-addr"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-pin"/></svg><span>г. Химки, ул. Московская, д. 38А, офис 502<br><small>Режим работы: 9.00 - 18.00</small></span></div>
     <div class="hdr-contact"><a class="hdr-phone num" href="tel:+74959919903" data-goal="phone">+7 (495) 991-99-03</a><a class="hdr-mail" href="mailto:info-ekoprom@mail.ru" data-goal="email">info-ekoprom@mail.ru</a></div>
     <div class="hdr-search search-box" data-search-box>
@@ -527,7 +538,7 @@ dialog.modal::backdrop { background: rgba(0, 0, 0, .5); }
 <footer class="ftr">
   <div class="wrap">
     <div class="ftr-top">
-      <div><a class="brand" href="/compressor-eko-demo/" aria-label="Экоинжпром — на главную"><svg class="logo-svg logo-lockup ftr-logo" viewBox="245 111 2807 514" role="img" aria-label="Экоинжпром"><g class="lg-gear"><path class="gear-spin" d="M522.6 164.1L526.5 130.7L619.5 130.7L623.4 164.1A269 207.6 0 0 1 661.5 171.9L686.5 144.5L767 180.4L748.8 210.8A269 207.6 0 0 1 776.6 232.3L816.1 218.3L862.6 280.4L827.1 299.7A269 207.6 0 0 1 837.3 329.1L880.5 332.1L880.5 403.9L837.3 406.9A269 207.6 0 0 1 827.1 436.3L862.6 455.6L816.1 517.7L776.6 503.7A269 207.6 0 0 1 748.8 525.2L767 555.6L686.5 591.5L661.5 564.1A269 207.6 0 0 1 623.4 571.9L619.5 605.3L526.5 605.3L522.6 571.9A269 207.6 0 0 1 484.5 564.1L459.5 591.5L379 555.6L397.2 525.2A269 207.6 0 0 1 369.4 503.7L329.9 517.7L283.4 455.6L318.9 436.3A269 207.6 0 0 1 308.7 406.9L265.5 403.9L265.5 332.1L308.7 329.1A269 207.6 0 0 1 318.9 299.7L283.4 280.4L329.9 218.3L369.4 232.3A269 207.6 0 0 1 397.2 210.8L379 180.4L459.5 144.5L484.5 171.9A269 207.6 0 0 1 522.6 164.1Z" fill="none" stroke="currentColor" stroke-width="34" stroke-linejoin="round"/></g><g class="lg-inner"><path d="M444 362C402 326 408 250 470 230C522 213 624 213 676 230C738 250 744 326 702 362C652 338 494 338 444 362Z" fill="none" stroke="currentColor" stroke-width="30" stroke-linejoin="round"/></g><g class="lg-title" transform="translate(170.2 -1036.0) scale(3.2463)"><path d="M284.28 462.17Q277.98 462.17 273.02 460.24Q268.06 458.32 264.62 454.39Q261.18 450.46 259.39 444.51L269.73 441.94Q271.21 446.42 274.83 449.33Q278.44 452.25 283.58 452.21Q287.19 452.13 290.48 450.77Q293.77 449.41 295.79 446.61Q297.27 444.74 298.06 442.51Q298.86 440.27 299.21 437.9H279.61V428.02H299.29Q298.59 423.74 296.57 420.52Q294.54 417.29 291.28 415.5Q288.01 413.71 283.58 413.79Q278.33 413.83 274.65 416.74Q270.98 419.66 269.58 424.52L259 423.04Q261.1 413.87 267.67 408.85Q274.24 403.83 284.28 403.83Q292.41 403.83 298.34 407.51Q304.27 411.18 307.49 417.76Q310.72 424.33 310.72 433Q310.72 441.17 307.55 447.78Q304.38 454.39 298.45 458.28Q292.52 462.17 284.28 462.17ZM323.79 461V405H334.36V430.82L355.67 405H368.59L345.17 432.61L370.06 461H356.69L334.36 435.49V461ZM404.83 462.17Q396.43 462.17 390.34 458.51Q384.25 454.86 380.97 448.28Q377.68 441.71 377.68 433Q377.68 424.29 380.97 417.72Q384.25 411.14 390.34 407.49Q396.43 403.83 404.83 403.83Q413.23 403.83 419.31 407.49Q425.4 411.14 428.68 417.72Q431.97 424.29 431.97 433Q431.97 441.71 428.68 448.28Q425.4 454.86 419.31 458.51Q413.23 462.17 404.83 462.17ZM404.83 452.21Q410.15 452.29 413.69 449.92Q417.23 447.54 419 443.19Q420.77 438.83 420.77 433Q420.77 427.17 419 422.89Q417.23 418.61 413.69 416.24Q410.15 413.87 404.83 413.79Q399.5 413.71 395.96 416.08Q392.42 418.46 390.65 422.81Q388.88 427.17 388.88 433Q388.88 438.83 390.65 443.11Q392.42 447.39 395.96 449.76Q399.5 452.13 404.83 452.21ZM490.84 461H480.11V423.67L455.77 461H445.03V405H455.77V442.33L480.11 405H490.84ZM507.02 461V405H517.6V428.02H542.64V405H553.22V461H542.64V437.9H517.6V461ZM564.73 461 584.56 432.61 566.2 405H578.73L594.59 430.04V405H605.17V430.04L621.04 405H633.56L615.2 432.61L635.04 461H622.05L605.17 436.27V461H594.59V436.27L577.71 461ZM646.54 461V405H692.74V461H682.17V414.88H657.12V461ZM708.92 461V405H732.56Q733.38 405 734.76 405.06Q736.14 405.12 737.23 405.31Q742.25 406.09 745.45 408.62Q748.66 411.14 750.18 414.98Q751.7 418.81 751.7 423.51Q751.7 428.22 750.16 432.05Q748.62 435.88 745.42 438.41Q742.21 440.93 737.23 441.71Q736.14 441.87 734.74 441.94Q733.34 442.02 732.56 442.02H719.5V461ZM719.5 432.14H732.1Q732.91 432.14 733.89 432.07Q734.86 431.99 735.67 431.76Q737.81 431.17 738.98 429.79Q740.15 428.41 740.59 426.72Q741.04 425.03 741.04 423.51Q741.04 421.99 740.59 420.3Q740.15 418.61 738.98 417.23Q737.81 415.85 735.67 415.27Q734.86 415.03 733.89 414.96Q732.91 414.88 732.1 414.88H719.5ZM788.79 462.17Q780.39 462.17 774.31 458.51Q768.22 454.86 764.93 448.28Q761.65 441.71 761.65 433Q761.65 424.29 764.93 417.72Q768.22 411.14 774.31 407.49Q780.39 403.83 788.79 403.83Q797.19 403.83 803.28 407.49Q809.36 411.14 812.65 417.72Q815.94 424.29 815.94 433Q815.94 441.71 812.65 448.28Q809.36 454.86 803.28 458.51Q797.19 462.17 788.79 462.17ZM788.79 452.21Q794.12 452.29 797.66 449.92Q801.2 447.54 802.97 443.19Q804.74 438.83 804.74 433Q804.74 427.17 802.97 422.89Q801.2 418.61 797.66 416.24Q794.12 413.87 788.79 413.79Q783.46 413.71 779.93 416.08Q776.39 418.46 774.62 422.81Q772.85 427.17 772.85 433Q772.85 438.83 774.62 443.11Q776.39 447.39 779.93 449.76Q783.46 452.13 788.79 452.21ZM829 461V405H838.49L857 442.18L875.51 405H885V461H875.12V427.56L858.87 461H855.13L838.88 427.56V461Z" fill="currentColor"/></g></svg></a>
+      <div><a class="brand brand-ftr" href="/compressor-eko-demo/" aria-label="Экоинжпром — на главную"><img class="brand-img" src="/compressor-eko-demo/img/logo-client.png" width="340" height="250" alt="Экоинжпром" loading="lazy"></a>
         <p>ООО «Экоинжпром»<br>ИНН <span class="num">5047196862</span></p>
         <p><a href="/compressor-eko-demo/privacy.html">Политика конфиденциальности</a></p></div>
       <div><p class="ftr-h">Каталог</p><ul><li><a href="/compressor-eko-demo/vintovye-kompressory.html">Винтовые компрессоры</a></li><li><a href="/compressor-eko-demo/refrizheratornye-osushiteli.html">Рефрижераторные и адсорбционные осушители</a></li><li><a href="/compressor-eko-demo/vintovye-bezmaslyanye-kompressory.html">Винтовые безмасляные компрессоры</a></li><li><a href="/compressor-eko-demo/zapchasti-dlya-kompressorov.html">Запасные части, расходуемые материалы</a></li><li><a href="/compressor-eko-demo/chillery.html">Чиллеры</a></li><li><a href="/compressor-eko-demo/gradirni.html">Градирни</a></li><li><a href="/compressor-eko-demo/azotnye-stancii.html">Азотные станции</a></li><li><a href="/compressor-eko-demo/vakuumnye-nasosy.html">Вакуумные насосы Becker</a></li><li><a href="/compressor-eko-demo/dizelnye-elektrostancii.html">Дизельные электростанции</a></li></ul></div>
@@ -581,7 +592,7 @@ dialog.modal::backdrop { background: rgba(0, 0, 0, .5); }
     <div class="form-status" role="status" aria-live="polite"></div>
     <div><button class="btn btn-dark" type="submit">Отправить<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></button></div>
   </form></div></dialog>
-<script src="/compressor-eko-demo/js/main.e3302ebc.js" defer></script>
+<script src="/compressor-eko-demo/js/main.cbf99c92.js" defer></script>
 
 </body>
 </html>
