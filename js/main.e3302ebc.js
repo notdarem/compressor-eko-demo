@@ -302,6 +302,7 @@
     $('[data-prev]', slider)?.addEventListener('click', () => { go(cur - 1); restart(); });
     $('[data-next]', slider)?.addEventListener('click', () => { go(cur + 1); restart(); });
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    slider.addEventListener('focusin', () => clearInterval(timer));
     const restart = () => { clearInterval(timer); if (!reduce) timer = setInterval(() => { if (!document.hidden) go(cur + 1); }, 6000); };
     slider.addEventListener('pointerenter', () => clearInterval(timer));
     slider.addEventListener('pointerleave', restart);
