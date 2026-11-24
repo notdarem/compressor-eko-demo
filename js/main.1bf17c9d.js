@@ -50,6 +50,11 @@
   /* ---------------- модальные окна ---------------- */
   const dlg = (id) => document.getElementById('dlg-' + id);
   const openDialog = (id, opts = {}) => {
+    if (id === 'search') { // поиск теперь в шапке: ставим курсор в поле
+      const field = $$('[data-site-search]').find((x) => x.offsetParent);
+      if (field) field.focus(); else if (burger) { burger.click(); setTimeout(() => $('#mnav [data-site-search]')?.focus(), 50); }
+      return;
+    }
     const d = dlg(id);
     if (!d) return;
     if (!mnav.hidden) burger.click();
@@ -57,9 +62,8 @@
     if (opts.descr !== undefined) { const p = d.querySelector('[data-dlg-descr]'); if (p) { p.dataset.orig ??= p.textContent; p.textContent = opts.descr; } }
     if (opts.model !== undefined) { const m = d.querySelector('[name=model]'); if (m) m.value = opts.model; }
     if (typeof d.showModal === 'function') d.showModal(); else d.setAttribute('open', '');
-    const first = d.querySelector('input:not([type=hidden]):not([tabindex="-1"]), textarea, [data-site-search]');
+    const first = d.querySelector('input:not([type=hidden]):not([tabindex="-1"]), textarea');
     if (first) setTimeout(() => first.focus(), 50);
-    if (id === 'search') loadIndex();
   };
   document.addEventListener('click', (e) => {
     const b = e.target.closest('[data-open]');
@@ -287,18 +291,16 @@
   if (slider) {
     const slides = $$('[data-slide]', slider);
     const dots = $$('[data-dot]', slider);
-    const link = $('[data-slide-link]', slider);
-    const title = $('[data-slide-title]', slider);
     let cur = 0;
     let timer;
     const go = (i) => {
       cur = (i + slides.length) % slides.length;
-      slides.forEach((s, k) => { s.classList.toggle('is-on', k === cur); s.setAttribute('aria-hidden', String(k !== cur)); });
+      slides.forEach((s, k) => { s.classList.toggle('is-on', k === cur); s.inert = k !== cur; });
       dots.forEach((d, k) => d.setAttribute('aria-current', String(k === cur)));
-      link.href = dots[cur].dataset.href;
-      title.textContent = dots[cur].dataset.title;
     };
     dots.forEach((d) => d.addEventListener('click', () => { go(+d.dataset.dot); restart(); }));
+    $('[data-prev]', slider)?.addEventListener('click', () => { go(cur - 1); restart(); });
+    $('[data-next]', slider)?.addEventListener('click', () => { go(cur + 1); restart(); });
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const restart = () => { clearInterval(timer); if (!reduce) timer = setInterval(() => { if (!document.hidden) go(cur + 1); }, 6000); };
     slider.addEventListener('pointerenter', () => clearInterval(timer));
@@ -321,25 +323,33 @@
     b.remove();
   });
 
-  /* ---------------- поиск по сайту (индекс грузится лениво) ---------------- */
+  /* ---------------- поиск по сайту: поле в шапке и в мобильном меню (индекс грузится лениво) ---------------- */
   let index = null;
-  const input = $('[data-site-search]');
-  const results = $('[data-site-results]');
   async function loadIndex() {
     if (index) return index;
     try { index = await (await fetch((window.EKO_BASE || '/') + 'search-index.json')).json(); } catch { index = []; }
     return index;
   }
   const norm = (s) => (s || '').toLowerCase().replace(/ё/g, 'е');
-  input?.addEventListener('input', async () => {
-    const term = norm(input.value.trim());
-    const idx = await loadIndex();
-    if (term.length < 2) { results.innerHTML = ''; return; }
-    const words = term.split(/\s+/);
-    const hits = idx.filter((x) => { const hay = norm(`${x.t} ${x.s} ${x.b} ${x.c}`); return words.every((w) => hay.includes(w)); }).slice(0, 30);
-    results.innerHTML = hits.length ? hits.map((x) => `<li><a href="${x.u}">${x.i ? `<img src="${x.i}" alt="" width="48" height="48" loading="lazy">` : '<span class="sr-ph"></span>'}<span><b>${x.t.replace(/</g, '&lt;')}</b><small>${[x.c, x.s ? 'арт. ' + x.s : ''].filter(Boolean).join(' · ')}</small></span></a></li>`).join('')
-      : '<li class="muted">Ничего не найдено. <button class="linklike" type="button" data-open="request">Оставьте заявку</button> — подберём.</li>';
+  $$('[data-search-box]').forEach((box) => {
+    const input = $('[data-site-search]', box);
+    const results = $('[data-site-results]', box);
+    const close = () => { results.innerHTML = ''; box.classList.toggle('open', false); };
+    input.addEventListener('focus', loadIndex, { once: true });
+    input.addEventListener('input', async () => {
+      const term = norm(input.value.trim());
+      const idx = await loadIndex();
+      if (term.length < 2) return close();
+      const words = term.split(/\s+/);
+      const hits = idx.filter((x) => { const hay = norm(`${x.t} ${x.s} ${x.b} ${x.c}`); return words.every((w) => hay.includes(w)); }).slice(0, 20);
+      results.innerHTML = hits.length ? hits.map((x) => `<li><a href="${x.u}">${x.i ? `<img src="${x.i}" alt="" width="48" height="48" loading="lazy">` : '<span class="sr-ph"></span>'}<span><b>${x.t.replace(/</g, '&lt;')}</b><small>${[x.c, x.s ? 'арт. ' + x.s : ''].filter(Boolean).join(' · ')}</small></span></a></li>`).join('')
+        : '<li class="muted">Ничего не найдено. <button class="linklike" type="button" data-open="request">Оставьте заявку</button> — подберём.</li>';
+      box.classList.toggle('open', true);
+    });
+    input.closest('form')?.addEventListener('submit', (e) => { e.preventDefault(); const link = $('a', results); if (link) location.href = link.href; });
+    input.addEventListener('keydown', (e) => { if (e.key === 'Escape') { input.value = ''; close(); } });
   });
+  document.addEventListener('click', (e) => { $$('[data-search-box].open').forEach((bx) => { if (!bx.contains(e.target)) bx.classList.toggle('open', false); }); });
 
   /* ---------------- cookie ---------------- */
   const ck = $('[data-cookie]');
