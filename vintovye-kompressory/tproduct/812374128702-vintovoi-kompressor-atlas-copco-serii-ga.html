@@ -663,13 +663,13 @@ body { padding-bottom: calc(62px + env(safe-area-inset-bottom)); }
     <div><button class="btn btn-dark" type="submit">Отправить<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></button></div>
   </form></div></dialog><dialog class="modal" id="dlg-sku" aria-labelledby="dlg-sku-t">
     <div class="modal-in"><button class="modal-x" type="button" data-close aria-label="Закрыть"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-close"/></svg></button>
-      <h2 id="dlg-sku-t">Запрос по артикулам</h2><p class="muted" data-dlg-descr>Вставьте список артикулов — по одному в строке, можно с количеством. Проверим наличие оригиналов и аналогов, пришлём цену и сроки.</p>
+      <h2 id="dlg-sku-t">Запрос по артикулам</h2><p class="muted" data-dlg-descr>Вставьте список артикулов — по одному в строке, можно с количеством. Не знаете артикул — укажите модель компрессора или просто оставьте телефон: подберём сами и пришлём цену и сроки.</p>
       <form class="form" action="/compressor-eko-demo/send.php" method="post" data-form="sku" novalidate>
     <input type="hidden" name="form_id" value="sku"><input type="hidden" name="page" value=""><input type="hidden" name="ts" value="0">
     <label class="hp" aria-hidden="true">Не заполняйте это поле<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
-    <label class="field"><span>Артикулы и количество <i aria-hidden="true">*</i></span><textarea class="input" id="f312-skus" name="skus" rows="3" required aria-required="true" placeholder="Например:
+    <label class="field"><span>Артикулы или модель компрессора</span><textarea class="input" id="f312-skus" name="skus" rows="3" placeholder="Например:
 2901050301 — 2 шт.
-1625183081 — 1 шт."></textarea><small class="err-msg" data-err="skus"></small></label>
+или: ремкомплект клапана для GA30"></textarea><small class="err-msg" data-err="skus"></small></label>
     <div class="form-row"><label class="field"><span>Телефон <i aria-hidden="true">*</i></span><input class="input" id="f312-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" data-mask="phone" required aria-required="true" placeholder="+7 (000) 000-00-00"><small class="err-msg" data-err="phone"></small></label><label class="field"><span>Имя или компания</span><input class="input" id="f312-name" name="name" type="text" autocomplete="name" placeholder=""><small class="err-msg" data-err="name"></small></label><label class="field"><span>E-mail</span><input class="input" id="f312-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="для ответа с КП"><small class="err-msg" data-err="email"></small></label></div>
     
     <label class="consent"><input type="checkbox" name="consent" value="yes" required aria-required="true"><span>Ознакомлен с правилами предоставления услуг и согласен на <a href="/compressor-eko-demo/privacy.html" target="_blank">обработку своих персональных данных</a></span></label>
