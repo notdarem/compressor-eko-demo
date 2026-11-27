@@ -461,6 +461,21 @@ dialog.modal::backdrop { background: rgba(0, 0, 0, .5); }
 .slider-dots button[aria-current="true"]::before { width: 22px; }
 .slider-arrow { flex: none; }
 }
+.sku-box { display: grid; gap: 18px; margin: 8px 0 28px; border-top: 3px solid var(--blue); }
+.sku-box h2 { margin: 0 0 8px; }
+.sku-box p { margin: 0 0 8px; }
+.sku-box textarea { min-height: 110px; font-family: inherit; }
+@media (min-width: 1100px) { .sku-box { grid-template-columns: 1fr 1.5fr; gap: 32px; align-items: start; } }
+.mbar { display: none; }
+@media (max-width: 899px) {
+.mbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 48; display: grid; grid-template-columns: 1fr 1.6fr; gap: 8px; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); background: #fff; border-top: 1px solid var(--line); box-shadow: 0 -4px 16px rgba(0, 0, 0, .08); }
+.mbar-a { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; border: 1px solid var(--blue); border-radius: var(--r); background: #fff; color: var(--blue); font: 600 15px/1.2 inherit; text-decoration: none; cursor: pointer; }
+.mbar-a .ico, .mbar-a svg { width: 18px; height: 18px; }
+.mbar-main { background: var(--blue); color: #fff; }
+body { padding-bottom: calc(62px + env(safe-area-inset-bottom)); }
+.cookie { bottom: calc(74px + env(safe-area-inset-bottom)); }
+}
+@media print { .mbar { display: none !important; } }
 </style>
 <script>document.documentElement.className=document.documentElement.className.replace('no-js','js');</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://compressor-eko.ru/"},{"@type":"ListItem","position":2,"name":"Рефрижераторные и адсорбционные осушители","item":"https://compressor-eko.ru/refrizheratornye-osushiteli"}]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Рефрижераторные осушители","url":"https://compressor-eko.ru/refrizheratornye-osushiteli","mainEntity":{"@type":"ItemList","numberOfItems":2,"itemListElement":[{"@type":"ListItem","position":1,"url":"https://compressor-eko.ru/refrizheratornye-osushiteli/tproduct/318083171512-refrizheratornie-osushiteli-ekomak-serii","name":"Рефрижераторные осушители Ekomak серии CAD"},{"@type":"ListItem","position":2,"url":"https://compressor-eko.ru/refrizheratornye-osushiteli/tproduct/962464086672-osushiteli-atlas-copco-tipa-cd-bd-fd-sd","name":"Осушители Atlas Copco типа CD, BD, FD, SD"}]}}</script>
@@ -506,6 +521,7 @@ dialog.modal::backdrop { background: rgba(0, 0, 0, .5); }
     <div class="prose cat-intro"><p>Осушители сжатого воздуха удаляют влагу из пневмосистем, предотвращая образование конденсата, коррозию и поломки оборудования.</p><p>Рефрижераторные осушители обеспечивают стандартную осушку до точки росы около +3°C и применяются в большинстве производственных задач.</p><p>Адсорбционные осушители используются там, где требуется максимально сухой воздух, и обеспечивают глубокую осушку до −40…−70°C.</p><p>Правильный выбор осушителя позволяет продлить срок службы оборудования, снизить затраты на обслуживание и обеспечить стабильную работу всей пневмосистемы.</p></div>
     
     <p class="btns"><button class="btn" type="button" data-open="request" data-dlg-title="Оставить заявку" data-dlg-descr="Заполните форму и мы свяжемся с вами в ближайшее рабочее время.">Оставить заявку</button><a class="btn btn-ghost" href="tel:+74959919903" data-goal="phone"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg>+7 (495) 991-99-03</a></p>
+    
     <section id="list" aria-label="Позиции каталога">
     <div data-catalog>
         <div class="toolbar">
@@ -553,7 +569,8 @@ dialog.modal::backdrop { background: rgba(0, 0, 0, .5); }
     <form class="form" action="/compressor-eko-demo/send.php" method="post" data-form="parts" novalidate>
     <input type="hidden" name="form_id" value="parts"><input type="hidden" name="page" value=""><input type="hidden" name="ts" value="0">
     <label class="hp" aria-hidden="true">Не заполняйте это поле<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
-    <div class="form-row"><label class="field"><span>Ваше имя</span><input class="input" id="f9-name" name="name" type="text" autocomplete="name" placeholder="Ваше имя"><small class="err-msg" data-err="name"></small></label><label class="field"><span>Телефон <i aria-hidden="true">*</i></span><input class="input" id="f9-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" data-mask="phone" required aria-required="true" placeholder="+7 (000) 000-00-00"><small class="err-msg" data-err="phone"></small></label><label class="field"><span>E-mail <i aria-hidden="true">*</i></span><input class="input" id="f9-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-required="true" placeholder="E-mail"><small class="err-msg" data-err="email"></small></label></div>
+    
+    <div class="form-row"><label class="field"><span>Ваше имя</span><input class="input" id="f11-name" name="name" type="text" autocomplete="name" placeholder="Ваше имя"><small class="err-msg" data-err="name"></small></label><label class="field"><span>Телефон <i aria-hidden="true">*</i></span><input class="input" id="f11-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" data-mask="phone" required aria-required="true" placeholder="+7 (000) 000-00-00"><small class="err-msg" data-err="phone"></small></label><label class="field"><span>E-mail <i aria-hidden="true">*</i></span><input class="input" id="f11-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-required="true" placeholder="E-mail"><small class="err-msg" data-err="email"></small></label></div>
     
     <label class="consent"><input type="checkbox" name="consent" value="yes" required aria-required="true"><span>Ознакомлен с правилами предоставления услуг и согласен на <a href="/compressor-eko-demo/privacy.html" target="_blank">обработку своих персональных данных</a></span></label>
     <small class="err-msg" data-err="consent"></small>
@@ -582,14 +599,19 @@ dialog.modal::backdrop { background: rgba(0, 0, 0, .5); }
   </div>
 </footer>
 <div class="cookie" data-cookie hidden><span>Мы используем файлы cookie для улучшения работы сайта. Продолжая использовать сайт, вы соглашаетесь с <a href="/compressor-eko-demo/privacy.html">условиями обработки ваших данных</a>.</span><button class="btn btn-sm" type="button" data-cookie-ok>Хорошо</button></div>
+<div class="mbar" aria-label="Быстрая связь">
+  <a class="mbar-a" href="tel:+74959919903" data-goal="phone"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span>Позвонить</span></a>
+  <button class="mbar-a mbar-main" type="button" data-open="request"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg><span>Оставить заявку</span></button>
+</div>
 <dialog class="modal" id="dlg-callback" aria-labelledby="dlg-callback-t">
     <div class="modal-in"><button class="modal-x" type="button" data-close aria-label="Закрыть"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-close"/></svg></button>
       <h2 id="dlg-callback-t">Заказать обратный звонок</h2><p class="muted" data-dlg-descr>Заполните форму и мы свяжемся с вами в ближайшее рабочее время.</p>
       <form class="form" action="/compressor-eko-demo/send.php" method="post" data-form="callback" novalidate>
     <input type="hidden" name="form_id" value="callback"><input type="hidden" name="page" value=""><input type="hidden" name="ts" value="0">
     <label class="hp" aria-hidden="true">Не заполняйте это поле<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
-    <div class="form-row"><label class="field"><span>Имя <i aria-hidden="true">*</i></span><input class="input" id="f10-name" name="name" type="text" autocomplete="name" required aria-required="true" placeholder=""><small class="err-msg" data-err="name"></small></label><label class="field"><span>Телефон <i aria-hidden="true">*</i></span><input class="input" id="f10-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" data-mask="phone" required aria-required="true" placeholder="+7 (000) 000-00-00"><small class="err-msg" data-err="phone"></small></label><label class="field"><span>E-mail <i aria-hidden="true">*</i></span><input class="input" id="f10-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-required="true" placeholder=""><small class="err-msg" data-err="email"></small></label></div>
-    <label class="field"><span>Комментарий</span><textarea class="input" id="f10-comment" name="comment" rows="3" placeholder=""></textarea><small class="err-msg" data-err="comment"></small></label>
+    
+    <div class="form-row"><label class="field"><span>Имя <i aria-hidden="true">*</i></span><input class="input" id="f12-name" name="name" type="text" autocomplete="name" required aria-required="true" placeholder=""><small class="err-msg" data-err="name"></small></label><label class="field"><span>Телефон <i aria-hidden="true">*</i></span><input class="input" id="f12-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" data-mask="phone" required aria-required="true" placeholder="+7 (000) 000-00-00"><small class="err-msg" data-err="phone"></small></label><label class="field"><span>E-mail <i aria-hidden="true">*</i></span><input class="input" id="f12-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-required="true" placeholder=""><small class="err-msg" data-err="email"></small></label></div>
+    <label class="field"><span>Комментарий</span><textarea class="input" id="f12-comment" name="comment" rows="3" placeholder=""></textarea><small class="err-msg" data-err="comment"></small></label>
     <label class="consent"><input type="checkbox" name="consent" value="yes" required aria-required="true"><span>Ознакомлен с правилами предоставления услуг и согласен на <a href="/compressor-eko-demo/privacy.html" target="_blank">обработку своих персональных данных</a></span></label>
     <small class="err-msg" data-err="consent"></small>
     <div class="form-status" role="status" aria-live="polite"></div>
@@ -600,8 +622,9 @@ dialog.modal::backdrop { background: rgba(0, 0, 0, .5); }
       <form class="form" action="/compressor-eko-demo/send.php" method="post" data-form="request" novalidate>
     <input type="hidden" name="form_id" value="request"><input type="hidden" name="page" value=""><input type="hidden" name="ts" value="0">
     <label class="hp" aria-hidden="true">Не заполняйте это поле<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
-    <div class="form-row"><label class="field"><span>Имя <i aria-hidden="true">*</i></span><input class="input" id="f11-name" name="name" type="text" autocomplete="name" required aria-required="true" placeholder=""><small class="err-msg" data-err="name"></small></label><label class="field"><span>Телефон <i aria-hidden="true">*</i></span><input class="input" id="f11-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" data-mask="phone" required aria-required="true" placeholder="+7 (000) 000-00-00"><small class="err-msg" data-err="phone"></small></label><label class="field"><span>E-mail <i aria-hidden="true">*</i></span><input class="input" id="f11-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-required="true" placeholder=""><small class="err-msg" data-err="email"></small></label></div>
-    <label class="field"><span>Комментарий</span><textarea class="input" id="f11-comment" name="comment" rows="3" placeholder=""></textarea><small class="err-msg" data-err="comment"></small></label>
+    
+    <div class="form-row"><label class="field"><span>Имя <i aria-hidden="true">*</i></span><input class="input" id="f13-name" name="name" type="text" autocomplete="name" required aria-required="true" placeholder=""><small class="err-msg" data-err="name"></small></label><label class="field"><span>Телефон <i aria-hidden="true">*</i></span><input class="input" id="f13-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" data-mask="phone" required aria-required="true" placeholder="+7 (000) 000-00-00"><small class="err-msg" data-err="phone"></small></label><label class="field"><span>E-mail <i aria-hidden="true">*</i></span><input class="input" id="f13-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-required="true" placeholder=""><small class="err-msg" data-err="email"></small></label></div>
+    <label class="field"><span>Комментарий</span><textarea class="input" id="f13-comment" name="comment" rows="3" placeholder=""></textarea><small class="err-msg" data-err="comment"></small></label>
     <label class="consent"><input type="checkbox" name="consent" value="yes" required aria-required="true"><span>Ознакомлен с правилами предоставления услуг и согласен на <a href="/compressor-eko-demo/privacy.html" target="_blank">обработку своих персональных данных</a></span></label>
     <small class="err-msg" data-err="consent"></small>
     <div class="form-status" role="status" aria-live="polite"></div>
@@ -612,12 +635,28 @@ dialog.modal::backdrop { background: rgba(0, 0, 0, .5); }
       <form class="form" action="/compressor-eko-demo/send.php" method="post" data-form="quote" novalidate>
     <input type="hidden" name="form_id" value="quote"><input type="hidden" name="page" value=""><input type="hidden" name="ts" value="0">
     <label class="hp" aria-hidden="true">Не заполняйте это поле<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
-    <div class="form-row"><label class="field"><span>Модель <i aria-hidden="true">*</i></span><input class="input" id="f12-model" name="model" type="text" required aria-required="true" placeholder=""><small class="err-msg" data-err="model"></small></label><label class="field"><span>Имя <i aria-hidden="true">*</i></span><input class="input" id="f12-name" name="name" type="text" autocomplete="name" required aria-required="true" placeholder=""><small class="err-msg" data-err="name"></small></label><label class="field"><span>Телефон <i aria-hidden="true">*</i></span><input class="input" id="f12-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" data-mask="phone" required aria-required="true" placeholder="+7 (000) 000-00-00"><small class="err-msg" data-err="phone"></small></label><label class="field"><span>E-mail <i aria-hidden="true">*</i></span><input class="input" id="f12-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-required="true" placeholder=""><small class="err-msg" data-err="email"></small></label></div>
-    <label class="field"><span>Комментарий</span><textarea class="input" id="f12-comment" name="comment" rows="3" placeholder=""></textarea><small class="err-msg" data-err="comment"></small></label>
+    
+    <div class="form-row"><label class="field"><span>Модель <i aria-hidden="true">*</i></span><input class="input" id="f14-model" name="model" type="text" required aria-required="true" placeholder=""><small class="err-msg" data-err="model"></small></label><label class="field"><span>Имя <i aria-hidden="true">*</i></span><input class="input" id="f14-name" name="name" type="text" autocomplete="name" required aria-required="true" placeholder=""><small class="err-msg" data-err="name"></small></label><label class="field"><span>Телефон <i aria-hidden="true">*</i></span><input class="input" id="f14-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" data-mask="phone" required aria-required="true" placeholder="+7 (000) 000-00-00"><small class="err-msg" data-err="phone"></small></label><label class="field"><span>E-mail <i aria-hidden="true">*</i></span><input class="input" id="f14-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-required="true" placeholder=""><small class="err-msg" data-err="email"></small></label></div>
+    <label class="field"><span>Комментарий</span><textarea class="input" id="f14-comment" name="comment" rows="3" placeholder=""></textarea><small class="err-msg" data-err="comment"></small></label>
     <label class="consent"><input type="checkbox" name="consent" value="yes" required aria-required="true"><span>Ознакомлен с правилами предоставления услуг и согласен на <a href="/compressor-eko-demo/privacy.html" target="_blank">обработку своих персональных данных</a></span></label>
     <small class="err-msg" data-err="consent"></small>
     <div class="form-status" role="status" aria-live="polite"></div>
     <div><button class="btn btn-dark" type="submit">Отправить<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></button></div>
+  </form></div></dialog><dialog class="modal" id="dlg-sku" aria-labelledby="dlg-sku-t">
+    <div class="modal-in"><button class="modal-x" type="button" data-close aria-label="Закрыть"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-close"/></svg></button>
+      <h2 id="dlg-sku-t">Запрос по артикулам</h2><p class="muted" data-dlg-descr>Вставьте список артикулов — по одному в строке, можно с количеством. Проверим наличие оригиналов и аналогов, пришлём цену и сроки.</p>
+      <form class="form" action="/compressor-eko-demo/send.php" method="post" data-form="sku" novalidate>
+    <input type="hidden" name="form_id" value="sku"><input type="hidden" name="page" value=""><input type="hidden" name="ts" value="0">
+    <label class="hp" aria-hidden="true">Не заполняйте это поле<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+    <label class="field"><span>Артикулы и количество <i aria-hidden="true">*</i></span><textarea class="input" id="f15-skus" name="skus" rows="3" required aria-required="true" placeholder="Например:
+2901050301 — 2 шт.
+1625183081 — 1 шт."></textarea><small class="err-msg" data-err="skus"></small></label>
+    <div class="form-row"><label class="field"><span>Телефон <i aria-hidden="true">*</i></span><input class="input" id="f15-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" data-mask="phone" required aria-required="true" placeholder="+7 (000) 000-00-00"><small class="err-msg" data-err="phone"></small></label><label class="field"><span>Имя или компания</span><input class="input" id="f15-name" name="name" type="text" autocomplete="name" placeholder=""><small class="err-msg" data-err="name"></small></label><label class="field"><span>E-mail</span><input class="input" id="f15-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="для ответа с КП"><small class="err-msg" data-err="email"></small></label></div>
+    
+    <label class="consent"><input type="checkbox" name="consent" value="yes" required aria-required="true"><span>Ознакомлен с правилами предоставления услуг и согласен на <a href="/compressor-eko-demo/privacy.html" target="_blank">обработку своих персональных данных</a></span></label>
+    <small class="err-msg" data-err="consent"></small>
+    <div class="form-status" role="status" aria-live="polite"></div>
+    <div><button class="btn btn-dark" type="submit">Отправить запрос<svg class="i" aria-hidden="true" focusable="false"><use href="#i-arrow-right"/></svg></button></div>
   </form></div></dialog>
 <script src="/compressor-eko-demo/js/main.cbf99c92.js" defer></script>
 
